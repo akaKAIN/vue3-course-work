@@ -1,5 +1,7 @@
 <template>
-  <h1>LOST Layout</h1>
+  <div class="container">
+    <h1>LOST Layout</h1>
+  </div>
 </template>
 
 <script lang="ts">
