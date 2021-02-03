@@ -4,7 +4,12 @@ import Auth from '@/views/Auth.vue';
 const router: Router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/auth', name: 'Auth', component: Auth, meta: { layout: 'auth', auth: false } },
+    {
+      path: '/auth',
+      name: 'Auth',
+      component: Auth,
+      meta: { layout: 'auth', auth: false }
+    },
     {
       path: '/',
       name: 'home',
@@ -14,13 +19,13 @@ const router: Router = createRouter({
     {
       path: '/products/:id',
       name: 'product',
-      component: () => import('@/views/TheProduct.vue'),
+      component: () => import('@/views/Product.vue'),
       meta: { layout: 'main', auth: false }
     },
     {
       path: '/cart',
       name: 'cart',
-      component: () => import('@/views/TheCart.vue'),
+      component: () => import('@/views/Cart.vue'),
       meta: { layout: 'main', auth: false }
     }
   ]

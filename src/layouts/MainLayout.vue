@@ -1,4 +1,7 @@
-<template> </template>
+<template>
+  <h1>MainLayout</h1>
+  <router-view></router-view>
+</template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
