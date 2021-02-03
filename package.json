@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve-front": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "serve-db": "json-server --watch database.json --port 3000",
+    "dev": "concurrently \"yarn serve-front\" \"serve-db\""
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -30,9 +32,11 @@
     "@vue/eslint-config-typescript": "^5.0.2",
     "@vue/test-utils": "^2.0.0-0",
     "chai": "^4.1.2",
+    "concurrently": "^5.3.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "^7.0.0-0",
+    "json-server": "^0.16.3",
     "prettier": "^1.19.1",
     "typescript": "~3.9.3"
   }
