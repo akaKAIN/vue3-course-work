@@ -17,39 +17,29 @@
         <p class="text-right">
           <strong>Всего: {{ totalAmount }} руб.</strong>
         </p>
-        <p class="text-right"><button class="btn">Оплатить</button></p>
+        <p class="text-right">
+          <button class="btn">Оплатить</button>
+        </p>
       </template>
     </template>
   </suspense>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
-import { useCartProducts } from '@/use/useCartProducts';
-import { Product } from '@/models/base.model';
+import { defineComponent } from 'vue';
+import { useCartProduct } from '@/use/useCartProducts';
+import CartProductTable from '@/components/CartProductTable.vue';
 
 export default defineComponent({
   name: 'CartProduct',
+  components: { CartProductTable },
   async setup() {
     const {
       products,
-      request,
       addProduct,
-      subtractProduct
-    } = await useCartProducts();
-    if (!products.value) {
-      await request();
-      console.log(products.value);
-    }
-
-    const totalAmount = computed<number>(() => {
-      if (products.value) {
-        const reducer = (accum: number, product: Product): number =>
-          accum + product.count * product.price;
-        return products.value.reduce(reducer, 0);
-      }
-      return 0;
-    });
+      subtractProduct,
+      totalAmount
+    } = await useCartProduct();
 
     return { products, addProduct, subtractProduct, totalAmount };
   }

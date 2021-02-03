@@ -3,7 +3,7 @@
     <div class="card">
       <h1>Корзина</h1>
       <cart-product></cart-product>
-      <small class="text-danger">{{ error }}</small>
+      <small class="text-danger" v-if="error">{{ error }}</small>
     </div>
   </div>
 </template>

@@ -1,16 +1,11 @@
-import { ref } from 'vue';
 import { Product } from '@/models/base.model';
-import ApiService from '@/services/api.service';
+import { fetchCartProducts } from '@/fetch/cart-products.axios';
+import { computed } from 'vue';
 
-export function useCartProducts() {
-  const apiService = new ApiService();
-  const products = ref<Product[] | null>(null);
-  const request = async () => {
-    const resp = await apiService.getCartProducts();
-    if (resp.status === 200) {
-      products.value = resp.data;
-    }
-  };
+export async function useCartProduct() {
+  const { products, request } = fetchCartProducts();
+
+  await request();
 
   const removeProduct = (id: string): void => {
     if (products.value) {
@@ -45,5 +40,14 @@ export function useCartProducts() {
     }
   };
 
-  return { products, request, addProduct, subtractProduct };
+  const totalAmount = computed<number>(() => {
+    if (products.value) {
+      const reducer = (accum: number, product: Product): number =>
+        accum + product.count * product.price;
+      return products.value.reduce(reducer, 0);
+    }
+    return 0;
+  });
+
+  return { products, addProduct, subtractProduct, totalAmount };
 }
