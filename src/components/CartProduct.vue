@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { useCartProduct } from '@/use/useCartProducts';
-import CartProductTable from '@/components/CartProductTable.vue';
+import { defineComponent } from 'vue'
+import { useCartProduct } from '@/use/useCartProducts'
+import CartProductTable from '@/components/CartProductTable.vue'
 
 export default defineComponent({
   name: 'CartProduct',
@@ -32,9 +32,9 @@ export default defineComponent({
       addProduct,
       subtractProduct,
       totalAmount
-    } = await useCartProduct();
-    console.log('Gotten: ', products.value);
-    return { products, addProduct, subtractProduct, totalAmount };
+    } = await useCartProduct()
+    console.log('Gotten: ', products.value)
+    return { products, addProduct, subtractProduct, totalAmount }
   }
-});
+})
 </script>

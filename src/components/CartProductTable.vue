@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'CartProductTable',
@@ -36,5 +36,5 @@ export default defineComponent({
       default: () => []
     }
   }
-});
+})
 </script>

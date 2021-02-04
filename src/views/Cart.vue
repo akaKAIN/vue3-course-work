@@ -13,28 +13,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onErrorCaptured, ref } from 'vue';
-import CartProduct from '@/components/CartProduct.vue';
-import AppPage from '@/components/ui/AppPage.vue';
-import { CommonObject } from '@/models/base.model';
+import { defineComponent, onErrorCaptured, ref } from 'vue'
+import CartProduct from '@/components/CartProduct.vue'
+import AppPage from '@/components/ui/AppPage.vue'
+import { CommonObject } from '@/models/base.model'
 
 const CART_MODEL: CommonObject<number> = {
   '2': 3,
   '5': 1
-};
+}
 
 export default defineComponent({
   name: 'Cart',
   components: { AppPage, CartProduct },
   setup() {
-    const cart = ref<CommonObject<number>>(CART_MODEL);
-    const error = ref<null | unknown>(null);
+    const cart = ref<CommonObject<number>>(CART_MODEL)
+    const error = ref<null | unknown>(null)
     onErrorCaptured(err => {
-      error.value = err;
-      return true;
-    });
+      error.value = err
+      return true
+    })
 
-    return { error };
+    return { error }
   }
-});
+})
 </script>

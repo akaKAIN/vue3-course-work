@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'AppPage',
@@ -19,7 +19,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    document.title = `${props.title} | Shop`;
+    document.title = `${props.title} | Shop`
   }
-});
+})
 </script>

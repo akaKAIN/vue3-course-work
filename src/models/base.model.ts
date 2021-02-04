@@ -1,5 +1,5 @@
 export interface CommonObject<K> {
-  [id: string]: K;
+  [id: string]: K
 }
 
 // Вероятно излишний тип (можно заменить на string)
@@ -9,19 +9,19 @@ export type CategoryProduct =
   | 'meat'
   | 'fish'
   | 'greens'
-  | 'berries';
+  | 'berries'
 
 export interface Product {
-  id: string;
-  count: number;
-  title: string;
-  category: CategoryProduct; // or string
-  price: number;
-  img: string;
+  id: string
+  count: number
+  title: string
+  category: CategoryProduct // or string
+  price: number
+  img: string
 }
 
 export interface Category {
-  id: string;
-  title: string;
-  type: CategoryProduct; // or string
+  id: string
+  title: string
+  type: CategoryProduct // or string
 }

@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory, Router } from 'vue-router';
-import Auth from '@/views/Auth.vue';
+import { createRouter, createWebHistory, Router } from 'vue-router'
+import Auth from '@/views/Auth.vue'
 
 const router: Router = createRouter({
   history: createWebHistory(),
@@ -28,12 +28,14 @@ const router: Router = createRouter({
       component: () => import('@/views/Cart.vue'),
       meta: { layout: 'main', auth: false }
     }
-  ]
-});
+  ],
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'active'
+})
 
 router.beforeEach((to, from, next) => {
-  console.log(to, from);
-  next();
-});
+  console.log(to, from)
+  next()
+})
 
-export default router;
+export default router
