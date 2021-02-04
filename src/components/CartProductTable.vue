@@ -11,11 +11,11 @@
       <tr v-for="product in products" :key="product.id">
         <td>{{ product.title }}</td>
         <td>
-          <button class="btn danger" @click="$emit('add', product.id)">
+          <button class="btn danger" @click="$emit('subtract', product.id)">
             -
           </button>
           {{ product.count }} шт.
-          <button class="btn primary" @click="$emit('subtract', product.id)">
+          <button class="btn primary" @click="$emit('add', product.id)">
             +
           </button>
         </td>

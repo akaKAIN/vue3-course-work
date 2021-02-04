@@ -12,14 +12,8 @@ export default class ApiService {
 
   initAxios(): AxiosInstance {
     // Инициализация нового инстанса axios с базовой ссылкой
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-    };
     return axios.create({
-      baseURL: process.env.VUE_APP_DB_URL,
-      headers
+      baseURL: process.env.VUE_APP_DB_URL
     });
   }
 

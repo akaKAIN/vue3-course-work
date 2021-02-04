@@ -49,5 +49,27 @@ export async function useCartProduct() {
     return 0;
   });
 
+  const prepareProducts = () => {
+    if (products.value) {
+      products.value = products.value.filter(
+        (product: Product) => product.count !== 0
+      );
+      products.value.sort((a: Product, b: Product) => {
+        if (a.title > b.title) {
+          return 1;
+        }
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title === b.title) {
+          return 0;
+        }
+        return 0;
+      });
+    }
+  };
+
+  prepareProducts();
+
   return { products, addProduct, subtractProduct, totalAmount };
 }
