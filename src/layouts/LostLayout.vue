@@ -1,7 +1,6 @@
 <template>
-  <div class="container">
-    <h1>LOST Layout</h1>
-  </div>
+  <h1>LOST Layout</h1>
+  <router-view></router-view>
 </template>
 
 <script lang="ts">

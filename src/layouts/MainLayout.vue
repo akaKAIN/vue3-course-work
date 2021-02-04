@@ -1,10 +1,6 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <h1>MainLayout</h1>
-      <router-view></router-view>
-    </div>
-  </div>
+  <h1>MainLayout</h1>
+  <router-view></router-view>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,5 @@
-export interface CommonObject<T, K> {
-  keys<T>(id: T): K;
+export interface CommonObject<K> {
+  [id: string]: K;
 }
 
 // Вероятно излишний тип (можно заменить на string)
