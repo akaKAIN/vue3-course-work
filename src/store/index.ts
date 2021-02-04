@@ -1,5 +1,7 @@
 import { ActionTree, createStore, GetterTree, MutationTree } from 'vuex';
 import { RootState } from '@/models/store.model';
+import { products } from '@/store/modules/products';
+import { cart } from '@/store/modules/cart';
 
 const state: RootState = { message: null };
 
@@ -22,5 +24,5 @@ export default createStore({
   getters,
   mutations,
   actions,
-  modules: {}
+  modules: { products, cart }
 });

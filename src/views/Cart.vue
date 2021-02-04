@@ -28,10 +28,8 @@ export default defineComponent({
   components: { AppPage, CartProduct },
   setup() {
     const cart = ref<CommonObject<number>>(CART_MODEL);
-    console.log(cart.value);
     const error = ref<null | unknown>(null);
     onErrorCaptured(err => {
-      console.log('onErrorCaptured: ', err);
       error.value = err;
       return true;
     });
