@@ -57,16 +57,15 @@ export default defineComponent({
 
     const totalAmount = computed<number>(() => {
       if (cartProducts.value.length > 0) {
-        console.log('in total:', cartProducts.value)
-        cartProducts.value.reduce((accum: number, prod: Product) => {
+        return cartProducts.value.reduce((accum: number, prod: Product) => {
           return accum + prod.price * prod.count
         }, 0)
       }
       return 0
     })
 
+    emit('totalAmount', totalAmount.value)
     watch(totalAmount, () => {
-      console.log('emitted')
       emit('totalAmount', totalAmount.value)
     })
 

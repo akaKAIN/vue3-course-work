@@ -10,11 +10,15 @@ export function useCart(cartObject: CartType) {
     () => Object.keys(cart.value).length === 0
   )
 
+  const removeID = (id: string): void => {
+    delete cart.value[id]
+  }
+
   const incrementCartProduct = (id: string): void => {
     cart.value[id]++
   }
   const decrementCartProduct = (id: string): void => {
-    cart.value[id] > 0 && cart.value[id]--
+    cart.value[id] > 1 ? cart.value[id]-- : removeID(id)
   }
 
   return { cart, isCartEmpty, incrementCartProduct, decrementCartProduct }
