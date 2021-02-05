@@ -14,4 +14,5 @@ export interface ProductState {
 
 export interface CartState {
   cart: CommonObject<number>
+  totalAmount: number
 }

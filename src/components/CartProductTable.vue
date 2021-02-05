@@ -64,9 +64,9 @@ export default defineComponent({
       return 0
     })
 
-    emit('totalAmount', totalAmount.value)
+    store.dispatch('cart/setTotalAmount', totalAmount.value)
     watch(totalAmount, () => {
-      emit('totalAmount', totalAmount.value)
+      store.dispatch('cart/setTotalAmount', totalAmount.value)
     })
 
     return { cartProducts }
