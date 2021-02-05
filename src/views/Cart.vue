@@ -1,47 +1,26 @@
 <template>
-  <div class="card">
-    <h1>Корзина</h1>
-
-    <h3 class="text-center">В корзине пока ничего нет</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Наименование</th>
-          <th>Количество</th>
-          <th>Цена (шт)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Название товара</td>
-          <td>
-            <button class="btn primary">+</button>
-            42 шт.
-            <button class="btn danger">-</button>
-          </td>
-          <td>42 000 руб.</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr />
-    <p class="text-right"><strong>Всего: 14 200 руб.</strong></p>
-    <p class="text-right">
-      <button class="btn">Оплатить</button>
-    </p>
-  </div>
+  <app-page title="Корзина">
+    <cart-product></cart-product>
+    <small class="text-danger" v-if="error">{{ error }}</small>
+  </app-page>
 </template>
 
 <script lang="ts">
-import { CommonObject } from '@/models/base.model';
-
-const CART_MODEL: CommonObject<string, number> = {
-  '2': 3,
-  '5': 1
-};
-
-import { defineComponent, computed } from 'vue';
+import { defineComponent, onErrorCaptured, ref } from 'vue'
+import CartProduct from '@/components/CartProduct.vue'
+import AppPage from '@/components/ui/AppPage.vue'
 
 export default defineComponent({
-  name: 'Cart'
-});
+  name: 'Cart',
+  components: { AppPage, CartProduct },
+  setup() {
+    const error = ref<null | unknown>(null)
+    onErrorCaptured(err => {
+      error.value = err
+      return true
+    })
+
+    return { error }
+  }
+})
 </script>

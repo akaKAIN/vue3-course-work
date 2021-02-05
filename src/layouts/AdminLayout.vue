@@ -1,4 +1,5 @@
 <template>
+  <h1>Admin Layout</h1>
   <router-view></router-view>
 </template>
 
@@ -6,6 +7,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'AuthLayout'
+  name: 'AdminLayout'
 })
 </script>
