@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="product in products" :key="product.id">
+      <tr v-for="product in cartProducts" :key="product.id">
         <td>{{ product.title }}</td>
         <td>
           <button class="btn danger" @click="$emit('subtract', product.id)">
@@ -26,15 +26,51 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed, watch } from 'vue'
+import { CommonObject, Product } from '@/models/base.model'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'CartProductTable',
+  emits: ['subtract', 'add', 'totalAmount'],
   props: {
-    products: {
-      type: Array,
-      default: () => []
+    cart: {
+      type: Object,
+      default: (): CommonObject<string> => ({})
     }
+  },
+  setup(props, { emit }) {
+    const store = useStore()
+    const products = computed(() => store.getters['products/products'])
+    const cartProducts = computed<Product[]>(() => {
+      const cartProductsID: string[] = Object.keys(props.cart)
+      return products.value
+        .map((product: Product) => {
+          if (cartProductsID.includes(product.id)) {
+            const cartProduct = Object.assign({}, product)
+            cartProduct.count = props.cart[cartProduct.id]
+            return cartProduct
+          }
+        })
+        .filter((product: Product) => !!product)
+    })
+
+    const totalAmount = computed<number>(() => {
+      if (cartProducts.value.length > 0) {
+        console.log('in total:', cartProducts.value)
+        cartProducts.value.reduce((accum: number, prod: Product) => {
+          return accum + prod.price * prod.count
+        }, 0)
+      }
+      return 0
+    })
+
+    watch(totalAmount, () => {
+      console.log('emitted')
+      emit('totalAmount', totalAmount.value)
+    })
+
+    return { cartProducts }
   }
 })
 </script>

@@ -1,12 +1,13 @@
 <template>
-  <h3 class="text-center" v-if="!products">
+  <h3 class="text-center" v-if="isCartEmpty">
     В корзине пока ничего нет
   </h3>
   <template v-else>
     <cart-product-table
-      :products="products"
-      @add="addProduct"
-      @subtract="subtractProduct"
+      :cart="cart"
+      @add="incrementCartProduct"
+      @subtract="decrementCartProduct"
+      @totalAmount="setTotalAmount"
     ></cart-product-table>
     <hr />
     <p class="text-right">
@@ -19,22 +20,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useCartProduct } from '@/use/useCartProducts'
+import { defineComponent, ref } from 'vue'
 import CartProductTable from '@/components/CartProductTable.vue'
+import { useCart } from '@/use/useCart'
+import { CommonObject } from '@/models/base.model'
+
+const CART_MODEL: CommonObject<number> = {
+  '2': 3,
+  '5': 1,
+  '22': 4
+}
 
 export default defineComponent({
   name: 'CartProduct',
   components: { CartProductTable },
-  async setup() {
-    const {
-      products,
-      addProduct,
-      subtractProduct,
-      totalAmount
-    } = await useCartProduct()
-    console.log('Gotten: ', products.value)
-    return { products, addProduct, subtractProduct, totalAmount }
+  setup() {
+    const totalAmount = ref<number>(0)
+    const setTotalAmount = (amount: number): void => {
+      totalAmount.value = amount
+    }
+    return { ...useCart(CART_MODEL), totalAmount, setTotalAmount }
   }
 })
 </script>

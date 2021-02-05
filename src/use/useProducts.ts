@@ -1,9 +1,9 @@
 import { Product } from '@/models/base.model'
-import { fetchCartProducts } from '@/fetch/cart-products.axios'
+import { fetchProducts } from '@/fetch/products.axios'
 import { computed } from 'vue'
 
-export async function useCartProduct() {
-  const { products, request } = fetchCartProducts()
+export async function useProducts() {
+  const { products, request } = fetchProducts()
 
   await request()
 

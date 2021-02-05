@@ -1,7 +1,7 @@
 import { CartState, RootState } from '@/models/store.model'
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
 
-const state: CartState = { cart: { '2': 3, '4': 5 } }
+const state: CartState = { cart: {} }
 
 const getters: GetterTree<CartState, RootState> = {}
 
