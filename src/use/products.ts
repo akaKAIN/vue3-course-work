@@ -51,9 +51,7 @@ export async function useProducts() {
 
   const prepareProducts = () => {
     if (products.value) {
-      products.value = products.value.filter(
-        (product: Product) => product.count !== 0
-      )
+      // Сортировка по имени товара
       products.value.sort((a: Product, b: Product) => {
         if (a.title > b.title) {
           return 1
@@ -62,6 +60,20 @@ export async function useProducts() {
           return -1
         }
         if (a.title === b.title) {
+          return 0
+        }
+        return 0
+      })
+
+      // Сортировка товаров в конец списка, если их нет на складе (кол-во равно 0)
+      products.value.sort((a: Product, b: Product) => {
+        if (a.count === 0) {
+          return 1
+        }
+        if (b.count === 0) {
+          return -1
+        }
+        if (a.count === 0 && b.count === 0) {
           return 0
         }
         return 0

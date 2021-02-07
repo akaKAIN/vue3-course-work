@@ -22,19 +22,18 @@
 import { defineComponent } from 'vue'
 import CartProductTable from '@/components/CartProductTable.vue'
 import { useCart } from '@/use/cart'
-import { CommonObject } from '@/models/base.model'
 
-const CART_MODEL: CommonObject<number> = {
-  '2': 3,
-  '5': 1,
-  '22': 4
-}
+// const CART_MODEL: CommonObject<number> = {
+//   '2': 3,
+//   '5': 1,
+//   '22': 4
+// }
 
 export default defineComponent({
   name: 'CartProduct',
   components: { CartProductTable },
   setup() {
-    return { ...useCart(CART_MODEL) }
+    return { ...useCart() }
   }
 })
 </script>

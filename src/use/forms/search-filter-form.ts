@@ -9,6 +9,5 @@ export function useSearchFilterForm() {
   )
 
   const onSearch = handleSubmit(values => console.log('searching', values))
-  const clear = handleReset
-  return { searchText, sBlur, onSearch, clear }
+  return { searchText, sBlur, onSearch, clear: handleReset }
 }

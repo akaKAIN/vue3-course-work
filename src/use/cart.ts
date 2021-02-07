@@ -1,13 +1,13 @@
 import { CommonObject, Product } from '@/models/base.model'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 type CartType = CommonObject<number>
 
-export function useCart(cartObject: CartType) {
+export function useCart() {
   const store = useStore()
   const products = computed<Product[]>(() => store.getters['products/products'])
-  const cart = ref<CartType>(cartObject)
+  const cart = computed<CartType>(() => store.getters['cart/products'])
 
   const isCartEmpty = computed<boolean>(
     () => Object.keys(cart.value).length === 0
