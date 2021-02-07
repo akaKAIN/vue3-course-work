@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import TheNavBar from '@/components/TheNavBar.vue'
-import { useProducts } from '@/use/useProducts'
+import { useProducts } from '@/use/products.ts'
 import { useStore } from 'vuex'
 
 export default defineComponent({

@@ -7,7 +7,6 @@
       :cart="cart"
       @add="incrementCartProduct"
       @subtract="decrementCartProduct"
-      @totalAmount="setTotalAmount"
     ></cart-product-table>
     <hr />
     <p class="text-right">
@@ -20,9 +19,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import CartProductTable from '@/components/CartProductTable.vue'
-import { useCart } from '@/use/useCart'
+import { useCart } from '@/use/cart'
 import { CommonObject } from '@/models/base.model'
 
 const CART_MODEL: CommonObject<number> = {
@@ -35,11 +34,7 @@ export default defineComponent({
   name: 'CartProduct',
   components: { CartProductTable },
   setup() {
-    const totalAmount = ref<number>(0)
-    const setTotalAmount = (amount: number): void => {
-      totalAmount.value = amount
-    }
-    return { ...useCart(CART_MODEL), totalAmount, setTotalAmount }
+    return { ...useCart(CART_MODEL) }
   }
 })
 </script>

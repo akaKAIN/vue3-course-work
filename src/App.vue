@@ -1,10 +1,10 @@
 <template>
-  <Suspense>
+  <suspense>
     <template #default>
       <component v-bind:is="layout + '-layout'"></component>
     </template>
     <template #fallback><div class="loader"></div></template>
-  </Suspense>
+  </suspense>
 </template>
 
 <script lang="ts">
