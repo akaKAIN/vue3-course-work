@@ -1,18 +1,6 @@
 <template>
   <div class="card">
-    <div class="products-filter">
-      <div class="form-control">
-        <input type="text" placeholder="Найти товар..." />
-        <span class="form-control-clear">&times;</span>
-      </div>
-
-      <ul class="list">
-        <li class="list-item">Все</li>
-        <li class="list-item">
-          Название категории
-        </li>
-      </ul>
-    </div>
+    <side-bar-filter></side-bar-filter>
     <div class="products-table">
       <div class="product-card">
         <div class="product-img">
@@ -35,7 +23,10 @@
 </template>
 
 <script>
-export default {}
+import SideBarFilter from '../components/ui/SideBarFilter'
+export default {
+  components: { SideBarFilter }
+}
 </script>
 
 <style scoped>

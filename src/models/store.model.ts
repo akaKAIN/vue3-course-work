@@ -1,4 +1,4 @@
-import { CommonObject, Product } from '@/models/base.model'
+import { Category, CommonObject, Product } from '@/models/base.model'
 
 export interface RootState {
   message: string | null
@@ -10,6 +10,7 @@ export interface AuthState {
 
 export interface ProductState {
   products: Product[]
+  categories: Category[]
 }
 
 export interface CartState {

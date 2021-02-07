@@ -23,12 +23,6 @@ const router: Router = createRouter({
       meta: { layout: 'main', auth: false }
     },
     {
-      path: '/products',
-      name: 'products',
-      component: () => import('@/views/Product.vue'),
-      meta: { layout: 'main', auth: false }
-    },
-    {
       path: '/cart',
       name: 'cart',
       component: () => import('@/views/Cart.vue'),
@@ -40,7 +34,7 @@ const router: Router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to, from)
+  // console.log(to, from)
   next()
 })
 

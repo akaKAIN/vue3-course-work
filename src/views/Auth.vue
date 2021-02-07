@@ -18,7 +18,12 @@
           passwordError
         }}</small>
       </div>
-      <button type="submit" class="btn primary" @click="onSubmit">
+      <button
+        type="submit"
+        class="btn primary"
+        @click="onSubmit"
+        :disabled="isSubmitting"
+      >
         Войти
       </button>
     </form>
