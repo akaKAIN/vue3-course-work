@@ -5,30 +5,47 @@
     </div>
     <h4 class="product-title">{{ title }}</h4>
     <div class="text-center">
-      <button class="btn" v-if="count" :disabled="!count" @click="increment">
+      <button
+        class="btn"
+        v-if="!countInCart"
+        :disabled="!count"
+        @click="increment"
+      >
         {{ price }}
       </button>
       <div class="product-controls" v-else>
         <button class="btn danger" @click="decrement">-</button>
         <strong>{{ count }}</strong>
-        <button class="btn primary" @click="increment">+</button>
+        <button class="btn primary" @click="increment" :disabled="isDisabled">
+          +
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import ProductPropsMixin from '@/mixins/ProductProps'
 
 export default defineComponent({
   name: 'CardProduct',
   emits: ['increment', 'decrement'],
-  props: { ...ProductPropsMixin },
+  props: {
+    ...ProductPropsMixin,
+    countInCart: {
+      type: Number,
+      required: false,
+      default: 0
+    }
+  },
   setup(props, { emit }) {
     const increment = () => emit('increment', props.id)
     const decrement = () => emit('decrement', props.id)
-    return { increment, decrement }
+    const isDisabled = computed<boolean>(() => {
+      return props.countInCart < props.count
+    })
+    return { increment, decrement, isDisabled }
   }
 })
 </script>

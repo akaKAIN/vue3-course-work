@@ -10,6 +10,7 @@
       :price="product.price"
       @increment="incrementCartProduct"
       @decrement="decrementCartProduct"
+      :countInCart="getCountFromCart(product.id)"
     ></card-product>
   </div>
 </template>
@@ -31,7 +32,11 @@ export default defineComponent({
     const products = computed<Product[]>(
       () => store.getters['products/products']
     )
-    const { cart, decrementCartProduct, incrementCartProduct } = useCart()
+    const {
+      decrementCartProduct,
+      incrementCartProduct,
+      getCountFromCart
+    } = useCart()
 
     const filteredProducts = computed<Product[]>(() => {
       return products.value
@@ -53,7 +58,12 @@ export default defineComponent({
         })
     })
 
-    return { filteredProducts, decrementCartProduct, incrementCartProduct }
+    return {
+      filteredProducts,
+      decrementCartProduct,
+      incrementCartProduct,
+      getCountFromCart
+    }
   }
 })
 </script>

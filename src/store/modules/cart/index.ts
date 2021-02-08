@@ -3,13 +3,12 @@ import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
 import { CommonObject } from '@/models/base.model'
 
 export const localStorageKeyNameCart = 'userCart'
-let userCart = {}
+let userCart: CommonObject<number> = {}
 const userCartString: string | null = localStorage.getItem(
   localStorageKeyNameCart
 )
-if (userCartString) {
-  userCart = JSON.parse(userCartString)
-}
+
+userCart = userCartString ? JSON.parse(userCartString) : {}
 
 const state: CartState = { cart: userCart }
 

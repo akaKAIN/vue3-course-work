@@ -9,19 +9,34 @@ export function useCart() {
   const products = computed<Product[]>(() => store.getters['products/products'])
   const cart = computed<CartType>(() => store.getters['cart/products'])
 
-  const isCartEmpty = computed<boolean>(
-    () => Object.keys(cart.value).length === 0
-  )
+  const isCartEmpty = computed<boolean>(() => {
+    if (cart.value) {
+      return Object.keys(cart.value).length === 0
+    } else {
+      return true
+    }
+  })
 
   const removeID = (id: string): void => {
     delete cart.value[id]
   }
 
   const incrementCartProduct = (id: string): void => {
-    cart.value[id]++
+    if (cart.value) {
+      cart.value[id]++
+    }
   }
   const decrementCartProduct = (id: string): void => {
-    cart.value[id] > 1 ? cart.value[id]-- : removeID(id)
+    if (cart.value) {
+      cart.value[id] > 1 ? cart.value[id]-- : removeID(id)
+    }
+  }
+
+  const countFromCart = (productID: string): number => {
+    if (cart.value && cart.value[productID]) {
+      return cart.value[productID]
+    }
+    return 0
   }
 
   const totalAmount = computed<number>(() => {
@@ -42,6 +57,7 @@ export function useCart() {
     isCartEmpty,
     incrementCartProduct,
     decrementCartProduct,
+    getCountFromCart: countFromCart,
     totalAmount
   }
 }
