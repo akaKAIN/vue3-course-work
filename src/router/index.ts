@@ -20,7 +20,8 @@ const router: Router = createRouter({
       path: '/product/:id',
       name: 'product',
       component: () => import('@/views/Product.vue'),
-      meta: { layout: 'main', auth: false }
+      meta: { layout: 'main', auth: false },
+      props: true
     },
     {
       path: '/cart',

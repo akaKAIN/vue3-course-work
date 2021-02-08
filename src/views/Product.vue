@@ -1,29 +1,55 @@
 <template>
-  <app-page back center title="Свекла">
-    <img
-      src="https://images.grocery.yandex.net/2756334/33a66b51989449f9918122a775885fbc/300x300.png"
-    />
-    <p>Категория: <strong>Название категории</strong></p>
-    <button class="btn">
-      123 руб
-    </button>
-    <div class="product-controls in-card">
-      <button class="btn danger">-</button>
-      <strong>12</strong>
-      <button class="btn primary">+</button>
-    </div>
+  <app-page back center :title="product?.title" v-if="product">
+    <img :src="product?.img" :alt="product?.title" />
+    <p>
+      Категория: <strong>{{ product?.category }}</strong>
+    </p>
+    <purchase-control :id="id"></purchase-control>
   </app-page>
-  <h3 class="text-center text-white">
+  <h3 class="text-center text-white" v-else>
     Товара не найден.
   </h3>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import AppPage from '@/components/ui/AppPage.vue'
+import { Product } from '@/models/base.model'
+import { useStore } from 'vuex'
+import { useCart } from '@/use/cart'
+import PurchaseControl from '@/components/ui/PurchaseControl.vue'
 
 export default defineComponent({
   name: 'Product',
-  components: { AppPage }
+  components: { PurchaseControl, AppPage },
+  props: {
+    id: {
+      type: String
+    }
+  },
+  setup(props) {
+    const store = useStore()
+    const {
+      incrementCartProduct,
+      decrementCartProduct,
+      getCountFromCart
+    } = useCart()
+    const product = ref<Product | null>(null)
+    onMounted(() => {
+      product.value = store.getters['products/productByID'](props.id)
+    })
+    return {
+      incrementCartProduct,
+      decrementCartProduct,
+      getCountFromCart,
+      product
+    }
+  }
 })
 </script>
+
+<style>
+.card {
+  text-align: center;
+}
+</style>

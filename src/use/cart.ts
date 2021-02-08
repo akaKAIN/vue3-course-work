@@ -4,6 +4,8 @@ import { useStore } from 'vuex'
 
 type CartType = CommonObject<number>
 
+const DEFAULT_STEP = 1
+
 export function useCart() {
   const store = useStore()
   const products = computed<Product[]>(() => store.getters['products/products'])
@@ -22,7 +24,7 @@ export function useCart() {
   }
 
   const incrementCartProduct = (id: string) => {
-    store.commit('cart/incrementCartProduct', { id, step: 1 })
+    store.commit('cart/incrementCartProduct', { id, step: DEFAULT_STEP })
   }
   const decrementCartProduct = (id: string): void => {
     if (cart.value) {
@@ -31,7 +33,6 @@ export function useCart() {
   }
 
   const countFromCart = (productID: string): number => {
-    console.log('cart', cart.value)
     return cart.value && cart.value[productID] ? cart.value[productID] : 0
   }
 

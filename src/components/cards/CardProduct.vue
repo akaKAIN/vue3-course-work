@@ -1,35 +1,23 @@
 <template>
   <div class="product-card">
-    <div class="product-img">
-      <img :src="img" :alt="title" />
-    </div>
-    <h4 class="product-title">{{ title }}</h4>
-    <div class="text-center">
-      <button
-        class="btn"
-        v-if="!countInCart"
-        :disabled="!count"
-        @click="increment"
-      >
-        {{ price }}
-      </button>
-      <div class="product-controls" v-else>
-        <button class="btn danger" @click="decrement">-</button>
-        <strong>{{ countInCart }}</strong>
-        <button class="btn primary" @click="increment" :disabled="isDisabled">
-          +
-        </button>
+    <div @click="$router.push({ name: 'product', params: { id } })">
+      <div class="product-img">
+        <img :src="img" :alt="title" />
       </div>
+      <h4 class="product-title">{{ title }}</h4>
     </div>
+    <purchase-control :id="id"></purchase-control>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import ProductPropsMixin from '@/mixins/ProductProps'
+import PurchaseControl from '@/components/ui/PurchaseControl.vue'
 
 export default defineComponent({
   name: 'CardProduct',
+  components: { PurchaseControl },
   emits: ['increment', 'decrement'],
   props: {
     ...ProductPropsMixin,

@@ -6,6 +6,9 @@ const state: ProductState = { products: [], categories: [] }
 
 const getters: GetterTree<ProductState, RootState> = {
   products: (state: ProductState) => state.products,
+  productByID: (state: ProductState) => (id: string) => {
+    return state.products.find((product: Product) => product.id === id)
+  },
   categories: (state: ProductState) => state.categories
 }
 
