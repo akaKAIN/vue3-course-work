@@ -2,13 +2,17 @@
   <div class="products-filter">
     <form @submit.prevent="onSearch">
       <div class="form-control">
+        <label for="search"></label>
         <input
+          id="search"
           type="text"
           placeholder="Найти товар..."
           v-model="searchText"
           @blur="sBlur"
         />
-        <span class="form-control-clear" @click="clear">&times;</span>
+        <span class="form-control-clear" v-if="searchText" @click="clear"
+          >&times;</span
+        >
       </div>
     </form>
 
@@ -16,10 +20,15 @@
       <li class="list-item">
         <router-link :to="{ name: 'home' }">Все </router-link>
       </li>
-      <li class="list-item" v-for="category in categories" :key="category.id">
-        <router-link :to="{ name: 'home', query: { category: category.id } }">{{
-          category.title
-        }}</router-link>
+      <li
+        class="list-item"
+        v-for="category in categories"
+        :key="category.title"
+      >
+        <router-link
+          :to="{ name: 'home', query: { category: category.type } }"
+          >{{ category.title }}</router-link
+        >
       </li>
     </ul>
   </div>
