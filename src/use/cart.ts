@@ -7,7 +7,7 @@ type CartType = CommonObject<number>
 export function useCart() {
   const store = useStore()
   const products = computed<Product[]>(() => store.getters['products/products'])
-  const cart = computed<CartType>(() => store.getters['cart/products'])
+  const cart = computed<CartType>(() => store.getters['cart/cart'])
 
   const isCartEmpty = computed<boolean>(() => {
     if (cart.value) {
@@ -21,10 +21,8 @@ export function useCart() {
     delete cart.value[id]
   }
 
-  const incrementCartProduct = (id: string): void => {
-    if (cart.value) {
-      cart.value[id]++
-    }
+  const incrementCartProduct = (id: string) => {
+    store.commit('cart/incrementCartProduct', { id, step: 1 })
   }
   const decrementCartProduct = (id: string): void => {
     if (cart.value) {
@@ -33,10 +31,8 @@ export function useCart() {
   }
 
   const countFromCart = (productID: string): number => {
-    if (cart.value && cart.value[productID]) {
-      return cart.value[productID]
-    }
-    return 0
+    console.log('cart', cart.value)
+    return cart.value && cart.value[productID] ? cart.value[productID] : 0
   }
 
   const totalAmount = computed<number>(() => {

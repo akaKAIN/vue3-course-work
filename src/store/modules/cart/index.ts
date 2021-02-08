@@ -22,7 +22,10 @@ const mutations: MutationTree<CartState> = {
   incrementCartProduct: (
     state: CartState,
     item: { id: string; step: number }
-  ) => (state.cart[item.id] += item.step),
+  ) =>
+    (state.cart[item.id] = state.cart[item.id]
+      ? state.cart[item.id] + item.step
+      : item.step),
   decrementCartProduct: (
     state: CartState,
     item: { id: string; step: number }

@@ -15,7 +15,7 @@
       </button>
       <div class="product-controls" v-else>
         <button class="btn danger" @click="decrement">-</button>
-        <strong>{{ count }}</strong>
+        <strong>{{ countInCart }}</strong>
         <button class="btn primary" @click="increment" :disabled="isDisabled">
           +
         </button>
@@ -43,7 +43,7 @@ export default defineComponent({
     const increment = () => emit('increment', props.id)
     const decrement = () => emit('decrement', props.id)
     const isDisabled = computed<boolean>(() => {
-      return props.countInCart < props.count
+      return props.countInCart >= props.count
     })
     return { increment, decrement, isDisabled }
   }
