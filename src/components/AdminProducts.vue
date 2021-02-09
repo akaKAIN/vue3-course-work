@@ -1,5 +1,20 @@
 <template>
+  <teleport to="body">
+    <app-modal
+      v-if="isModalVisible"
+      title="Добавить продукт"
+      @close="isModalVisible = false"
+    >
+      <modal-create-product></modal-create-product>
+    </app-modal>
+  </teleport>
+
   <app-page title="Admin products">
+    <template #header>
+      <button class="btn primary" @click="isModalVisible = true">
+        Add product
+      </button>
+    </template>
     <table class="table">
       <thead>
         <tr>
@@ -24,21 +39,25 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import AppPage from './ui/AppPage.vue'
 import { useStore } from 'vuex'
 import { Product } from '@/models/base.model'
+import AppModal from '@/components/ui/AppModal.vue'
+import ModalCreateProduct from '@/components/requests/ModalCreateProduct.vue'
 
 export default defineComponent({
   name: 'AdminProducts',
-  components: { AppPage },
+  components: { ModalCreateProduct, AppModal, AppPage },
   setup() {
     const store = useStore()
     const products = computed<Product[]>(() => {
       return store.getters['products/products']
     })
 
-    return { products }
+    const isModalVisible = ref<boolean>(false)
+
+    return { products, isModalVisible: isModalVisible }
   }
 })
 </script>
