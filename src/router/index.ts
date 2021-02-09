@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, Router } from 'vue-router'
 import Auth from '@/views/Auth.vue'
+import { adminRouterModule } from '@/router/modules/admin'
 
 const router: Router = createRouter({
   history: createWebHistory(),
@@ -28,7 +29,8 @@ const router: Router = createRouter({
       name: 'cart',
       component: () => import('@/views/Cart.vue'),
       meta: { layout: 'main', auth: false }
-    }
+    },
+    adminRouterModule
   ],
   linkActiveClass: 'active',
   linkExactActiveClass: 'active'

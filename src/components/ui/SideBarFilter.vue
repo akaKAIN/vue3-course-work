@@ -27,6 +27,7 @@
       >
         <router-link
           :to="{ name: 'home', query: { category: category.type } }"
+          exact
           >{{ category.title }}</router-link
         >
       </li>

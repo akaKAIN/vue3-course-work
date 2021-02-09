@@ -10,7 +10,6 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import AdminLayout from '@/layouts/AdminLayout.vue'
 import MainLayout from '@/layouts/MainLayout.vue'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 
@@ -18,8 +17,7 @@ export default defineComponent({
   name: 'App',
   components: {
     MainLayout,
-    AuthLayout,
-    AdminLayout
+    AuthLayout
   },
   setup() {
     const route = useRoute()

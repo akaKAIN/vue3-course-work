@@ -8,6 +8,16 @@
       <li>
         <router-link :to="{ name: 'cart' }">Cart</router-link>
       </li>
+      <li>
+        <router-link :to="{ name: 'admin-products' }"
+          >Admin products</router-link
+        >
+      </li>
+      <li>
+        <router-link :to="{ name: 'admin-categories' }"
+          >Admin categories</router-link
+        >
+      </li>
     </ul>
   </nav>
 </template>
