@@ -1,9 +1,7 @@
 import * as yup from 'yup'
 import { useField, useForm } from 'vee-validate'
 
-type SubmitFn = () => {}
-
-export function useCreateProductForm(fn: SubmitFn) {
+export function useCreateProductForm() {
   const { isSubmitting, handleSubmit } = useForm()
   const { value: title, errorMessage: tError, handleBlur: tBlur } = useField(
     'title',
@@ -26,7 +24,6 @@ export function useCreateProductForm(fn: SubmitFn) {
       .min(1, 'Стоимость не может быть меньше 1')
   )
 
-  const onSubmit = handleSubmit(fn)
   return {
     title,
     tError,
@@ -37,7 +34,7 @@ export function useCreateProductForm(fn: SubmitFn) {
     price,
     pError,
     pBlur,
-    onSubmit,
-    isSubmitting
+    isSubmitting,
+    handleSubmit
   }
 }

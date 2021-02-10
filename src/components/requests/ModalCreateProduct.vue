@@ -29,7 +29,9 @@ import { useCreateProductForm } from '@/use/forms/create-product-form'
 export default defineComponent({
   name: 'ModalCreateProduct',
   setup() {
-    return { ...useCreateProductForm() }
+    return {
+      ...useCreateProductForm()
+    }
   }
 })
 </script>

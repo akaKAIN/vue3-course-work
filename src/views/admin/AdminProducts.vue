@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-import AppPage from './ui/AppPage.vue'
+import AppPage from '../../components/ui/AppPage.vue'
 import { useStore } from 'vuex'
 import { Product } from '@/models/base.model'
 import AppModal from '@/components/ui/AppModal.vue'

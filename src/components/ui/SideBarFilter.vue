@@ -27,9 +27,11 @@
       >
         <router-link
           :to="{ name: 'home', query: { category: category.type } }"
-          exact
-          >{{ category.title }}</router-link
+          custom
+          v-slot="{ navigate }"
         >
+          <a @click="navigate">{{ category.title }}</a>
+        </router-link>
       </li>
     </ul>
   </div>
