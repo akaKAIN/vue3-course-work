@@ -1,20 +1,42 @@
 import { CartState, RootState } from '@/models/store.model'
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
+import { CommonObject } from '@/models/base.model'
 
-const state: CartState = { cart: {}, totalAmount: 0 }
+export const localStorageKeyNameCart = 'userCart'
+let userCart: CommonObject<number> = {}
+const userCartString: string | null = localStorage.getItem(
+  localStorageKeyNameCart
+)
+
+userCart = userCartString ? JSON.parse(userCartString) : {}
+
+const state: CartState = { cart: userCart }
 
 const getters: GetterTree<CartState, RootState> = {
-  totalAmount: (state: CartState) => state.totalAmount
+  cart: (state: CartState) => state.cart
 }
 
 const mutations: MutationTree<CartState> = {
-  setTotalAmount: (state: CartState, amount: number) =>
-    (state.totalAmount = amount)
+  setCart: (state: CartState, cart: CommonObject<number>) =>
+    (state.cart = cart),
+  incrementCartProduct: (
+    state: CartState,
+    item: { id: string; step: number }
+  ) =>
+    (state.cart[item.id] = state.cart[item.id]
+      ? state.cart[item.id] + item.step
+      : item.step),
+  decrementCartProduct: (
+    state: CartState,
+    item: { id: string; step: number }
+  ) => (state.cart[item.id] -= item.step)
 }
 
 const actions: ActionTree<CartState, RootState> = {
-  setTotalAmount: ({ commit }, amount: number) =>
-    commit('setTotalAmount', amount)
+  incrementCartProduct: ({ commit }, item: { id: string; step: number }) =>
+    commit('incrementCartItem', item),
+  decrementCartProduct: ({ commit }, item: { id: string; step: number }) =>
+    commit('decrementCartItem', item)
 }
 
 const namespaced = true

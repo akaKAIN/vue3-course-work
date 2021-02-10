@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, Router } from 'vue-router'
 import Auth from '@/views/Auth.vue'
+import { adminRouterModule } from '@/router/modules/admin'
 
 const router: Router = createRouter({
   history: createWebHistory(),
@@ -20,27 +21,23 @@ const router: Router = createRouter({
       path: '/product/:id',
       name: 'product',
       component: () => import('@/views/Product.vue'),
-      meta: { layout: 'main', auth: false }
-    },
-    {
-      path: '/products',
-      name: 'products',
-      component: () => import('@/views/Product.vue'),
-      meta: { layout: 'main', auth: false }
+      meta: { layout: 'main', auth: false },
+      props: true
     },
     {
       path: '/cart',
       name: 'cart',
       component: () => import('@/views/Cart.vue'),
       meta: { layout: 'main', auth: false }
-    }
+    },
+    adminRouterModule
   ],
   linkActiveClass: 'active',
   linkExactActiveClass: 'active'
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to, from)
+  // console.log(to, from)
   next()
 })
 

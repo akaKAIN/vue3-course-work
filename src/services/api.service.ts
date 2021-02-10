@@ -19,12 +19,11 @@ export default class ApiService {
 
   // Запрос на получение списка товаров в корзине
   async getProducts(): Promise<AxiosResponse<Product[]>> {
-    console.log('get')
     return await this.axios.get(this._cartProducts)
   }
 
   // Запрос на получение списка категорий товаров
-  async getCategoryProducts(): Promise<AxiosResponse<Category>> {
+  async getCategoryProducts(): Promise<AxiosResponse<Category[]>> {
     return await this.axios.get(this._categoryProducts)
   }
 }

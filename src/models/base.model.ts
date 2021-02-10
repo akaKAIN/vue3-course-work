@@ -25,3 +25,7 @@ export interface Category {
   title: string
   type: CategoryProduct // or string
 }
+
+export interface IdentifiedObject {
+  id?: string
+}

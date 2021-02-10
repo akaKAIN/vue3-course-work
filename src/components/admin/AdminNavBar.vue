@@ -1,15 +1,15 @@
 <template>
   <nav class="navbar">
-    <h3>Shop App</h3>
+    <h3>Admin</h3>
     <ul class="navbar-menu">
       <li>
-        <router-link :to="{ name: 'home' }">Home</router-link>
+        <router-link :to="{ name: 'admin-products' }">Products</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'cart' }">Cart</router-link>
+        <router-link :to="{ name: 'admin-categories' }">Categories</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'admin' }">Admin</router-link>
+        <router-link :to="{ name: 'home' }">Back</router-link>
       </li>
     </ul>
   </nav>
@@ -19,6 +19,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'TheNavBar'
+  name: 'AdminNavBar'
 })
 </script>

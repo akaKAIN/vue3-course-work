@@ -26,20 +26,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { CommonObject, Product } from '@/models/base.model'
 import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'CartProductTable',
-  emits: ['subtract', 'add', 'totalAmount'],
+  emits: ['subtract', 'add'],
   props: {
     cart: {
       type: Object,
       default: (): CommonObject<string> => ({})
     }
   },
-  setup(props, { emit }) {
+  setup(props) {
     const store = useStore()
     const products = computed(() => store.getters['products/products'])
     const cartProducts = computed<Product[]>(() => {
@@ -53,20 +53,6 @@ export default defineComponent({
           }
         })
         .filter((product: Product) => !!product)
-    })
-
-    const totalAmount = computed<number>(() => {
-      if (cartProducts.value.length > 0) {
-        return cartProducts.value.reduce((accum: number, prod: Product) => {
-          return accum + prod.price * prod.count
-        }, 0)
-      }
-      return 0
-    })
-
-    store.dispatch('cart/setTotalAmount', totalAmount.value)
-    watch(totalAmount, () => {
-      store.dispatch('cart/setTotalAmount', totalAmount.value)
     })
 
     return { cartProducts }
