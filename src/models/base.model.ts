@@ -29,3 +29,16 @@ export interface Category {
 export interface IdentifiedObject {
   id?: string
 }
+
+export enum EnumModalTitle {
+  'default' = 'default',
+  'create-category' = 'Создать категорию',
+  'edit-category' = 'Редактировать категорию',
+  'delete-category' = 'Удалить категорию'
+}
+
+export type TitleKeys =
+  | 'default'
+  | 'create-category'
+  | 'edit-category'
+  | 'delete-category'

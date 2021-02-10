@@ -53,30 +53,16 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
-import { Category, IdentifiedObject } from '@/models/base.model'
+import {
+  Category,
+  IdentifiedObject,
+  EnumModalTitle,
+  TitleKeys
+} from '@/models/base.model'
 import AppPage from '@/components/ui/AppPage.vue'
 import AppModal from '@/components/ui/AppModal.vue'
 import ModalCreateCategory from '@/components/requests/ModalCreateCategory.vue'
 import ModalEditCategory from '@/components/requests/ModalEditCategory.vue'
-
-enum EnumModalTitle {
-  'default' = 'default',
-  'create-category' = 'Создать категорию',
-  'edit-category' = 'Редактировать категорию',
-  'delete-category' = 'Удалить категорию'
-}
-
-type TitleKeys =
-  | 'default'
-  | 'create-category'
-  | 'edit-category'
-  | 'delete-category'
-
-// type CommandTypes =
-//   | EnumModalTitle['default']
-//   | EnumModalTitle['create-category']
-//   | EnumModalTitle['delete-category']
-//   | EnumModalTitle['edit-category']
 
 export default defineComponent({
   name: 'AdminCategories',
@@ -91,7 +77,6 @@ export default defineComponent({
     const showModal = async (command: TitleKeys, id?: string) => {
       currentModal.value = command
       currentTitle.value = EnumModalTitle[command]
-      console.log(command, EnumModalTitle[command])
       if (id) {
         modalProps.value.id = id
       }
