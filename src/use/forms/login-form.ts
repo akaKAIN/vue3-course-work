@@ -1,6 +1,8 @@
 import * as yup from 'yup'
 import { useField, useForm } from 'vee-validate'
+import { notification } from '@/utils/notifications'
 
+const MIN_PASSWORD_LENGTH = 5
 export function useLoginForm() {
   const { handleSubmit, isSubmitting } = useForm()
   const {
@@ -12,8 +14,8 @@ export function useLoginForm() {
     yup
       .string()
       .trim()
-      .required('Обязательное для заполенения поле')
-      .email('Неверный фотмат электронной почты')
+      .required(notification.required)
+      .email(notification.wrongEmailFormat)
   )
 
   const {
@@ -25,8 +27,11 @@ export function useLoginForm() {
     yup
       .string()
       .trim()
-      .required('Обязательное для заполенения поле')
-      .min(5, 'Длина пароля должна быть более 4')
+      .required(notification.required)
+      .min(
+        MIN_PASSWORD_LENGTH,
+        `${notification.wrongPasswordLength} ${MIN_PASSWORD_LENGTH}`
+      )
   )
 
   const onSubmit = handleSubmit(values => console.log(values))

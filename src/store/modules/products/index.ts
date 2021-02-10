@@ -9,7 +9,10 @@ const getters: GetterTree<ProductState, RootState> = {
   productByID: (state: ProductState) => (id: string) => {
     return state.products.find((product: Product) => product.id === id)
   },
-  categories: (state: ProductState) => state.categories
+  categories: (state: ProductState) => state.categories,
+  categoryByID: (state: ProductState) => (id: string) => {
+    return state.categories.find((category: Category) => category.id === id)
+  }
 }
 
 const mutations: MutationTree<ProductState> = {
