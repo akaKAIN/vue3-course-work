@@ -7,11 +7,7 @@
     </template>
 
     <teleport to="body">
-      <app-modal
-        title="Редактировать категорию"
-        v-if="modal"
-        @close="closeModal"
-      >
+      <app-modal :title="currentTitle" v-if="modal" @close="closeModal">
         <component
           :is="'modal-' + currentModal"
           v-bind="modalProps"
@@ -63,6 +59,25 @@ import AppModal from '@/components/ui/AppModal.vue'
 import ModalCreateCategory from '@/components/requests/ModalCreateCategory.vue'
 import ModalEditCategory from '@/components/requests/ModalEditCategory.vue'
 
+enum EnumModalTitle {
+  'default' = 'default',
+  'create-category' = 'Создать категорию',
+  'edit-category' = 'Редактировать категорию',
+  'delete-category' = 'Удалить категорию'
+}
+
+type TitleKeys =
+  | 'default'
+  | 'create-category'
+  | 'edit-category'
+  | 'delete-category'
+
+// type CommandTypes =
+//   | EnumModalTitle['default']
+//   | EnumModalTitle['create-category']
+//   | EnumModalTitle['delete-category']
+//   | EnumModalTitle['edit-category']
+
 export default defineComponent({
   name: 'AdminCategories',
   components: { AppModal, AppPage, ModalCreateCategory, ModalEditCategory },
@@ -70,20 +85,23 @@ export default defineComponent({
     const store = useStore()
     const modal = computed<boolean>(() => store.getters['isModalVisible'])
     const currentModal = ref<string>('')
+    const currentTitle = ref<string>(EnumModalTitle['default'])
     const modalProps = ref<IdentifiedObject>({})
 
-    const showModal = async (command: string, id?: string) => {
+    const showModal = async (command: TitleKeys, id?: string) => {
       currentModal.value = command
+      currentTitle.value = EnumModalTitle[command]
+      console.log(command, EnumModalTitle[command])
       if (id) {
         modalProps.value.id = id
       }
       await store.dispatch('turnOnModal')
     }
 
-    const closeModal = async (command: string) => {
-      console.log(command)
+    const closeModal = async () => {
       await store.dispatch('turnOffModal')
       currentModal.value = ''
+      currentTitle.value = ''
     }
 
     const categories = computed<Category[]>(() => {
@@ -93,6 +111,7 @@ export default defineComponent({
     return {
       modal,
       currentModal,
+      currentTitle,
       modalProps,
       showModal,
       closeModal,
