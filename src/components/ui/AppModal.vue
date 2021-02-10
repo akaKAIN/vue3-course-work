@@ -10,6 +10,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
+  emits: ['close'],
   name: 'AppModal',
   props: {
     title: String

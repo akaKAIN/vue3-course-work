@@ -24,9 +24,7 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     const layout = computed<string>(() => {
-      const layoutName = route.meta.layout ? route.meta.layout : 'lost'
-      console.log(layoutName)
-      return layoutName
+      return route.meta.layout ? route.meta.layout : 'lost'
     })
 
     return { layout }
