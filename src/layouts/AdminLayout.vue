@@ -1,6 +1,7 @@
 <template>
   <admin-nav-bar></admin-nav-bar>
   <div class="container with-nav"></div>
+  <the-message></the-message>
   <router-view></router-view>
 </template>
 
@@ -10,10 +11,11 @@ import AdminNavBar from '@/components/admin/AdminNavBar.vue'
 import { useStore } from 'vuex'
 import { useProducts } from '@/use/products'
 import { useCategories } from '@/use/categories'
+import TheMessage from '@/components/TheMessage.vue'
 
 export default defineComponent({
   name: 'AdminLayout',
-  components: { AdminNavBar },
+  components: { TheMessage, AdminNavBar },
   async setup() {
     const store = useStore()
 

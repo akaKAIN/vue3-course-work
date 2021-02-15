@@ -7,11 +7,7 @@
     </template>
 
     <teleport to="body">
-      <app-modal
-        title="Редактировать категорию"
-        v-if="modal"
-        @close="closeModal"
-      >
+      <app-modal :title="currentTitle" v-if="modal" @close="closeModal">
         <component
           :is="'modal-' + currentModal"
           v-bind="modalProps"
@@ -45,7 +41,7 @@
               type="button"
               @click="showModal('delete-category', category.id)"
             >
-              Удалить
+              &times;
             </button>
           </td>
         </tr>
@@ -57,7 +53,12 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
-import { Category, IdentifiedObject } from '@/models/base.model'
+import {
+  Category,
+  IdentifiedObject,
+  EnumModalTitle,
+  TitleKeys
+} from '@/models/base.model'
 import AppPage from '@/components/ui/AppPage.vue'
 import AppModal from '@/components/ui/AppModal.vue'
 import ModalCreateCategory from '@/components/requests/ModalCreateCategory.vue'
@@ -70,20 +71,22 @@ export default defineComponent({
     const store = useStore()
     const modal = computed<boolean>(() => store.getters['isModalVisible'])
     const currentModal = ref<string>('')
+    const currentTitle = ref<string>(EnumModalTitle['default'])
     const modalProps = ref<IdentifiedObject>({})
 
-    const showModal = async (command: string, id?: string) => {
+    const showModal = async (command: TitleKeys, id?: string) => {
       currentModal.value = command
+      currentTitle.value = EnumModalTitle[command]
       if (id) {
         modalProps.value.id = id
       }
       await store.dispatch('turnOnModal')
     }
 
-    const closeModal = async (command: string) => {
-      console.log(command)
+    const closeModal = async () => {
       await store.dispatch('turnOffModal')
       currentModal.value = ''
+      currentTitle.value = ''
     }
 
     const categories = computed<Category[]>(() => {
@@ -93,6 +96,7 @@ export default defineComponent({
     return {
       modal,
       currentModal,
+      currentTitle,
       modalProps,
       showModal,
       closeModal,

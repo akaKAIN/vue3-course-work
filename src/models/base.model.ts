@@ -29,3 +29,24 @@ export interface Category {
 export interface IdentifiedObject {
   id?: string
 }
+
+export type MessageLevels = 'primary' | 'warming' | 'danger'
+
+export interface MessageObject {
+  title: string
+  text: string
+  level: MessageLevels
+}
+
+export enum EnumModalTitle {
+  'default' = 'default',
+  'create-category' = 'Создать категорию',
+  'edit-category' = 'Редактировать категорию',
+  'delete-category' = 'Удалить категорию'
+}
+
+export type TitleKeys =
+  | 'default'
+  | 'create-category'
+  | 'edit-category'
+  | 'delete-category'

@@ -8,11 +8,15 @@ import {
 import { RootState } from '@/models/store.model'
 import { products } from '@/store/modules/products'
 import { cart } from '@/store/modules/cart'
+import { MessageObject } from '@/models/base.model'
 
 const plugins = []
 if (process.env.NODE_ENV === 'development') {
   plugins.push(createLogger())
 }
+
+const MESSAGE_LIFE_TIME = 3000
+
 const state: RootState = { message: null, isModalVisible: false }
 
 const getters: GetterTree<RootState, RootState> = {
@@ -21,15 +25,18 @@ const getters: GetterTree<RootState, RootState> = {
 }
 
 const mutations: MutationTree<RootState> = {
-  setMessage: (state: RootState, message: string) => (state.message = message),
-  clearMessage: (state: RootState) => (state.message = null),
+  setMessage: (state: RootState, message: MessageObject | null) =>
+    (state.message = message),
   toggleModal: (state: RootState, isVisible: boolean) =>
     (state.isModalVisible = isVisible)
 }
 
 const actions: ActionTree<RootState, RootState> = {
-  setMessage: ({ commit }, message: string) => commit('setMessage', message),
-  clearMessage: ({ commit }) => commit('clearMessage'),
+  setMessage: ({ commit }, message: MessageObject) => {
+    commit('setMessage', message)
+    setTimeout(() => commit('setMessage', null), MESSAGE_LIFE_TIME)
+  },
+  clearMessage: ({ commit }) => commit('setMessage', null),
   turnOnModal: ({ commit }) => commit('toggleModal', true),
   turnOffModal: ({ commit }) => commit('toggleModal', false)
 }
