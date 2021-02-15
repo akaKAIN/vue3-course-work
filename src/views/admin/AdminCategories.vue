@@ -41,7 +41,7 @@
               type="button"
               @click="showModal('delete-category', category.id)"
             >
-              Удалить
+              &times;
             </button>
           </td>
         </tr>

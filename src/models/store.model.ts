@@ -1,7 +1,12 @@
-import { Category, CommonObject, Product } from '@/models/base.model'
+import {
+  Category,
+  CommonObject,
+  MessageObject,
+  Product
+} from '@/models/base.model'
 
 export interface RootState {
-  message: string | null
+  message: MessageObject | null
   isModalVisible: boolean
 }
 
