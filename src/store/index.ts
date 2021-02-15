@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
   plugins.push(createLogger())
 }
 
-const MESSAGE_LIFE_TIME = 5000
+const MESSAGE_LIFE_TIME = 3000
 
 const state: RootState = { message: null, isModalVisible: false }
 

@@ -1,5 +1,4 @@
 <template>
-  <button class="btn" type="button" @click="setIt">CHANGE</button>
   <transition name="show-message">
     <div v-if="message" :class="['message', 'alert', message.level]">
       <h3 id="message-title">{{ message.title }}</h3>
@@ -20,17 +19,9 @@ export default defineComponent({
     const message = computed<MessageObject | null>(
       () => store.getters['message']
     )
-    const setIt = async () => {
-      await store.dispatch('setMessage', {
-        title: 'New',
-        text: 'new text',
-        level: 'warning'
-      })
-    }
 
     return {
-      message,
-      setIt
+      message
     }
   }
 })
