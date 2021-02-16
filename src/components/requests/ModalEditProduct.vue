@@ -30,7 +30,7 @@
       <small class="text-danger" v-if="cError">{{ cError }}</small>
     </div>
 
-    <button class="btn primary">G</button>
+    <button class="btn primary" @click="onSubmit">Редактировать</button>
   </form>
 </template>
 
