@@ -48,6 +48,11 @@
       </tbody>
     </table>
   </app-page>
+  <the-pagination
+    :count="allCategories.length"
+    :size="size"
+    v-model="pageNumber"
+  ></the-pagination>
 </template>
 
 <script lang="ts">
@@ -63,10 +68,18 @@ import AppPage from '@/components/ui/AppPage.vue'
 import AppModal from '@/components/ui/AppModal.vue'
 import ModalCreateCategory from '@/components/requests/ModalCreateCategory.vue'
 import ModalEditCategory from '@/components/requests/ModalEditCategory.vue'
+import ThePagination from '@/components/ThePagination.vue'
+import { usePagination, ADMIN_CATEGORY_PAGINATION_SIZE } from '@/use/pagination'
 
 export default defineComponent({
   name: 'AdminCategories',
-  components: { AppModal, AppPage, ModalCreateCategory, ModalEditCategory },
+  components: {
+    ThePagination,
+    AppModal,
+    AppPage,
+    ModalCreateCategory,
+    ModalEditCategory
+  },
   setup() {
     const store = useStore()
     const modal = computed<boolean>(() => store.getters['isModalVisible'])
@@ -88,9 +101,14 @@ export default defineComponent({
       currentModal.value = ''
     }
 
-    const categories = computed<Category[]>(() => {
+    const allCategories = computed<Category[]>(() => {
       return store.getters['products/categories']
     })
+
+    const {
+      paginatedArray: categories,
+      bindingPageNumber: pageNumber
+    } = usePagination(allCategories.value, ADMIN_CATEGORY_PAGINATION_SIZE)
 
     return {
       modal,
@@ -99,7 +117,10 @@ export default defineComponent({
       modalProps,
       showModal,
       closeModal,
-      categories
+      categories,
+      allCategories,
+      pageNumber,
+      size: ADMIN_CATEGORY_PAGINATION_SIZE
     }
   }
 })

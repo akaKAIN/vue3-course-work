@@ -28,14 +28,12 @@ export default defineComponent({
     )
     const {
       paginatedArray: products,
-      bindingPageNumber: pageNumber,
-      page
+      bindingPageNumber: pageNumber
     } = usePagination(allProducts.value, ADMIN_PRODUCT_PAGINATION_SIZE)
 
     return {
       products,
       pageNumber,
-      page,
       allProducts,
       size: ADMIN_PRODUCT_PAGINATION_SIZE
     }

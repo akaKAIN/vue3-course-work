@@ -1,6 +1,6 @@
 <template>
-  <div class="container card">
-    <ul class="pagination">
+  <div :class="{ 'container card': isIsolated }">
+    <ul class="pagination text-center">
       <button
         type="button"
         class="pagination-item"
@@ -46,6 +46,10 @@ export default defineComponent({
     },
     modelValue: {
       type: Number
+    },
+    isIsolated: {
+      type: Boolean,
+      default: true
     }
   },
   setup(props) {
@@ -63,6 +67,7 @@ export default defineComponent({
 <style scoped>
 .pagination {
   display: flex;
+  padding: 0 20px;
 }
 
 .pagination-item {
@@ -81,11 +86,12 @@ export default defineComponent({
 .pagination-item.active {
   background-color: #3eaf7c;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .pagination-item:hover {
-  cursor: pointer;
   background-color: #3eaf7c;
+  transition: 0.4s;
 }
 
 .pagination-item:disabled:hover {
