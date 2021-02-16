@@ -27,7 +27,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import CardProduct from '@/components/cards/CardProduct.vue'
-import ThePagination from '@/components/ThePagination.vue'
+import ThePagination from '@/components/ui/ThePagination.vue'
 import { useStore } from 'vuex'
 import { Product } from '@/models/base.model'
 import { useCart } from '@/use/cart'

@@ -68,7 +68,7 @@ import AppPage from '@/components/ui/AppPage.vue'
 import AppModal from '@/components/ui/AppModal.vue'
 import ModalCreateCategory from '@/components/requests/ModalCreateCategory.vue'
 import ModalEditCategory from '@/components/requests/ModalEditCategory.vue'
-import ThePagination from '@/components/ThePagination.vue'
+import ThePagination from '@/components/ui/ThePagination.vue'
 import { usePagination, ADMIN_CATEGORY_PAGINATION_SIZE } from '@/use/pagination'
 
 export default defineComponent({

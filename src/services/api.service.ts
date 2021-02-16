@@ -26,4 +26,9 @@ export default class ApiService {
   async getCategoryProducts(): Promise<AxiosResponse<Category[]>> {
     return await this.axios.get(this._categoryProducts)
   }
+
+  // Создание новой категории
+  async createCategory(category: Category): Promise<AxiosResponse<Category>> {
+    return await this.axios.post(this._categoryProducts, category)
+  }
 }
