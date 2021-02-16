@@ -13,7 +13,9 @@ export function usePagination<T>(ArrayItem: Array<T>, paginationSize: number) {
     route.query.page ? +route.query.page : 1
   )
   const addQueryPage = async (queryPageNum: number) =>
-    await router.replace({ query: { page: queryPageNum } })
+    await router.replace({
+      query: { ...route.query, page: queryPageNum }
+    })
   const paginatedArray = computed<Array<T>>(
     () => chunk<T>(ArrayItem, paginationSize)[page.value - 1]
   )

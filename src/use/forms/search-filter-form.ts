@@ -12,10 +12,9 @@ export function useSearchFilterForm() {
     yup.string().trim()
   )
   watch(searchText, () => {
-    const query = route.query
-    router.push({
+    router.replace({
       name: 'home',
-      query: { ...query, search: searchText.value }
+      query: { ...route.query, search: searchText.value }
     })
   })
 
