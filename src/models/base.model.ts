@@ -40,13 +40,9 @@ export interface MessageObject {
 
 export enum EnumModalTitle {
   'default' = 'default',
-  'create-category' = 'Создать категорию',
-  'edit-category' = 'Редактировать категорию',
-  'delete-category' = 'Удалить категорию'
+  'create' = 'Создать',
+  'edit' = 'Редактировать',
+  'delete' = 'Удалить'
 }
 
-export type TitleKeys =
-  | 'default'
-  | 'create-category'
-  | 'edit-category'
-  | 'delete-category'
+export type TitleKeys = 'default' | 'create' | 'edit' | 'delete'

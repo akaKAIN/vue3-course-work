@@ -1,7 +1,16 @@
 <template>
+  <teleport to="body">
+    <app-modal v-if="modal" :title="currentTitle" @close="close">
+      <component
+        :is="'modal-' + currentModal + '-product'"
+        v-bind="modalProps"
+      ></component>
+    </app-modal>
+  </teleport>
+
   <app-page title="Admin products">
     <template #header>
-      <button class="btn primary" @click="openModal">
+      <button class="btn primary" @click="openModal('create')">
         Add product
       </button>
     </template>
@@ -24,7 +33,9 @@
           <td>{{ product.price }}</td>
           <td>{{ product.count }}</td>
           <td>
-            <button class="btn">Редактировать</button>
+            <button class="btn" @click="openModal('edit', product.id)">
+              Редактировать
+            </button>
             <button class="btn warning">&times;</button>
           </td>
         </tr>
@@ -34,9 +45,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed, ref } from 'vue'
 import AppPage from '@/components/ui/AppPage.vue'
+import AppModal from '@/components/ui/AppModal.vue'
+import ModalCreateProduct from '@/components/requests/ModalCreateProduct.vue'
+import ModalEditProduct from '@/components/requests/ModalEditProduct.vue'
 import { useStore } from 'vuex'
+import {
+  EnumModalTitle,
+  IdentifiedObject,
+  TitleKeys
+} from '@/models/base.model'
 
 export default defineComponent({
   name: 'AdminProductList',
@@ -47,13 +66,29 @@ export default defineComponent({
     }
   },
   components: {
-    AppPage
+    AppPage,
+    AppModal,
+    ModalCreateProduct,
+    ModalEditProduct
   },
   setup() {
     const store = useStore()
-    const openModal = async () => await store.dispatch('turnOnModal')
+    const currentModal = ref<string>('')
+    const currentTitle = ref<string>(EnumModalTitle['default'])
+    const modalProps = ref<IdentifiedObject | null>(null)
+    const modal = computed<boolean>(() => store.getters['isModalVisible'])
+    const openModal = async (command: TitleKeys, id?: string) => {
+      if (id) {
+        modalProps.value = { id }
+      }
+      currentModal.value = command
+      currentTitle.value = `${EnumModalTitle[command]} продукт`
+      await store.dispatch('turnOnModal', null)
+    }
 
-    return { openModal }
+    const close = async () => await store.dispatch('turnOffModal')
+
+    return { openModal, currentModal, currentTitle, modalProps, modal, close }
   }
 })
 </script>
