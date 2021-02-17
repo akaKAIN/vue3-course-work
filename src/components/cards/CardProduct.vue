@@ -1,14 +1,16 @@
 <template>
-  <div class="product-card text-center">
-    <div @click="$router.push({ name: 'product', params: { id } })">
-      <div class="product-img">
-        <img :src="img" :alt="title" />
+  <keep-alive>
+    <div class="product-card text-center">
+      <div @click="$router.push({ name: 'product', params: { id } })">
+        <div class="product-img">
+          <img :src="img" :alt="title" />
+        </div>
+        <h4 class="product-title">{{ title }}</h4>
       </div>
-      <h4 class="product-title">{{ title }}</h4>
+      <purchase-control :id="id" v-if="count"></purchase-control>
+      <button class="btn" v-else disabled>Нет в наличии</button>
     </div>
-    <purchase-control :id="id" v-if="count"></purchase-control>
-    <button class="btn" v-else disabled>Нет в наличии</button>
-  </div>
+  </keep-alive>
 </template>
 
 <script lang="ts">
