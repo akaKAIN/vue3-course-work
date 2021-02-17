@@ -20,12 +20,17 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useCategoryForm } from '@/use/forms/category-form'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'ModalCreateCategory',
   setup() {
-    const CreateCategoryFn = (values: Record<string, number | string>) => {
-      console.log('creating: ', values)
+    const store = useStore()
+    const CreateCategoryFn = async (
+      values: Record<string, number | string>
+    ) => {
+      const id = Math.floor(Math.random() * 10e10).toString()
+      await store.dispatch('products/createCategory', { ...values, id })
     }
     return { ...useCategoryForm(CreateCategoryFn) }
   }

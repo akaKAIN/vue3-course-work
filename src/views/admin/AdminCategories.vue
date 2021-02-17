@@ -60,15 +60,15 @@ import { computed, defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
 import {
   Category,
-  IdentifiedObject,
   EnumModalTitle,
-  TitleKeys
+  TitleKeys,
+  IdentifiedObjectOptional
 } from '@/models/base.model'
 import AppPage from '@/components/ui/AppPage.vue'
 import AppModal from '@/components/ui/AppModal.vue'
 import ModalCreateCategory from '@/components/requests/ModalCreateCategory.vue'
 import ModalEditCategory from '@/components/requests/ModalEditCategory.vue'
-import ThePagination from '@/components/ThePagination.vue'
+import ThePagination from '@/components/ui/ThePagination.vue'
 import { usePagination, ADMIN_CATEGORY_PAGINATION_SIZE } from '@/use/pagination'
 
 export default defineComponent({
@@ -85,7 +85,7 @@ export default defineComponent({
     const modal = computed<boolean>(() => store.getters['isModalVisible'])
     const currentModal = ref<string>('')
     const currentTitle = ref<string>(EnumModalTitle['default'])
-    const modalProps = ref<IdentifiedObject>({})
+    const modalProps = ref<IdentifiedObjectOptional>({})
 
     const showModal = async (command: TitleKeys, id?: string) => {
       if (id) {

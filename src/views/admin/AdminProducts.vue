@@ -12,7 +12,7 @@ import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { Product } from '@/models/base.model'
 import AdminProductList from '@/components/admin/AdminProductList.vue'
-import ThePagination from '@/components/ThePagination.vue'
+import ThePagination from '@/components/ui/ThePagination.vue'
 import { usePagination, ADMIN_PRODUCT_PAGINATION_SIZE } from '@/use/pagination'
 
 export default defineComponent({

@@ -1,6 +1,9 @@
 import { ProductState, RootState } from '@/models/store.model'
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
 import { Category, Product } from '@/models/base.model'
+import ApiService from '@/services/api.service'
+
+const apiService = new ApiService()
 
 const state: ProductState = { products: [], categories: [] }
 
@@ -19,14 +22,21 @@ const mutations: MutationTree<ProductState> = {
   setProducts: (state: ProductState, products: Product[]) =>
     (state.products = products),
   setCategories: (state: ProductState, categories: Category[]) =>
-    (state.categories = categories)
+    (state.categories = categories),
+  addCategory: (state: ProductState, category: Category) => {
+    state.categories.push(category)
+  }
 }
 
 const actions: ActionTree<ProductState, RootState> = {
   setProducts: ({ commit }, products: Product[]) =>
     commit('setProducts', products),
   setCategories: ({ commit }, categories: Category[]) =>
-    commit('setCategories', categories)
+    commit('setCategories', categories),
+  createCategory: async ({ commit }, category: Category) => {
+    const { data } = await apiService.createCategory(category)
+    commit('addCategory', data)
+  }
 }
 
 const namespaced = true
