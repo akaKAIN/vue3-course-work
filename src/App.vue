@@ -1,10 +1,5 @@
 <template>
-  <suspense>
-    <template #default>
-      <component v-bind:is="layout + '-layout'"></component>
-    </template>
-    <template #fallback><div class="loader"></div></template>
-  </suspense>
+  <component v-bind:is="layout + '-layout'"></component>
 </template>
 
 <script lang="ts">
