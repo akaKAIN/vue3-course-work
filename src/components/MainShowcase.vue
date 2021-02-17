@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, watch, nextTick } from 'vue'
 import CardProduct from '@/components/cards/CardProduct.vue'
 import ThePagination from '@/components/ui/ThePagination.vue'
 import { useStore } from 'vuex'
@@ -76,6 +76,12 @@ export default defineComponent({
       filteredProducts.value,
       SHOP_PRODUCTS_PAGINATION_SIZE
     )
+
+    watch(products, async (fresh, old) => {
+      console.log('products was updated', old, fresh)
+      await nextTick()
+      console.log('tickeded')
+    })
 
     return {
       filteredProducts,
