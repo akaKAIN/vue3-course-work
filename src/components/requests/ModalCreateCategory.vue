@@ -31,6 +31,12 @@ export default defineComponent({
     ) => {
       const id = Math.floor(Math.random() * 10e10).toString()
       await store.dispatch('products/createCategory', { ...values, id })
+      await store.dispatch('setMessage', {
+        title: 'Success',
+        text: `Created category ${values.title}`,
+        level: 'primary'
+      })
+      await store.dispatch('turnOffModal', null)
     }
     return { ...useCategoryForm(CreateCategoryFn) }
   }
