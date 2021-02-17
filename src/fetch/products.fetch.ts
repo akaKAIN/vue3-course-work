@@ -1,14 +1,18 @@
 import { ref } from 'vue'
-import { Product } from '@/models/base.model'
+import { BaseProduct, Product, Unformatted } from '@/models/base.model'
 import ApiService from '@/services/api.service'
+import { formatResponseElem } from '@/utils/formatter'
 import { AxiosResponse } from 'axios'
 
 export function fetchProducts() {
   const apiService = new ApiService()
   const products = ref<Product[] | null>(null)
   const request = async () => {
-    const response: AxiosResponse<Product[]> = await apiService.getProducts()
-    products.value = response.data
+    const {
+      data
+    }: AxiosResponse<Unformatted<BaseProduct>> = await apiService.getProducts()
+
+    products.value = formatResponseElem<BaseProduct, Product>(data)
   }
 
   return { products, request }

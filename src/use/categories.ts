@@ -1,4 +1,4 @@
-import { fetchCategories } from '@/fetch/categories.axios'
+import { fetchCategories } from '@/fetch/categories.fetch'
 
 export async function useCategories() {
   const { categories, request } = fetchCategories()

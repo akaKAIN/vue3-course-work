@@ -1,12 +1,10 @@
 import { Product } from '@/models/base.model'
-import { fetchProducts } from '@/fetch/products.axios'
+import { fetchProducts } from '@/fetch/products.fetch'
 import { computed } from 'vue'
 
 export async function useProducts() {
   const { products, request } = fetchProducts()
-
   await request()
-
   const removeProduct = (id: string): void => {
     if (products.value) {
       const ind: number = products.value.findIndex(

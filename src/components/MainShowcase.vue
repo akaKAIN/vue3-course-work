@@ -50,6 +50,9 @@ export default defineComponent({
     } = useCart()
 
     const filteredProducts = computed<Product[]>(() => {
+      if (!products.value) {
+        return []
+      }
       return products.value
         .filter((product: Product) => {
           if (route.query.category) {

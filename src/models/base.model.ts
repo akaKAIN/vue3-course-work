@@ -1,5 +1,17 @@
+export interface IdentifiedObjectOptional {
+  id?: string
+}
+
+export interface IdentifiedObject {
+  id: string
+}
+
 export interface CommonObject<K> {
   [id: string]: K
+}
+
+export interface Unformatted<T> {
+  [key: string]: T
 }
 
 // Вероятно излишний тип (можно заменить на string)
@@ -11,8 +23,7 @@ export type CategoryProduct =
   | 'greens'
   | 'berries'
 
-export interface Product {
-  id: string
+export interface BaseProduct {
   count: number
   title: string
   category: CategoryProduct // or string
@@ -20,14 +31,17 @@ export interface Product {
   img: string
 }
 
-export interface Category {
-  id: string
+export interface BaseCategory {
   title: string
   type: CategoryProduct // or string
 }
 
-export interface IdentifiedObject {
-  id?: string
+export interface Product extends BaseProduct, IdentifiedObject {}
+
+export interface Category extends BaseCategory, IdentifiedObject {}
+
+export interface CreationResponse {
+  name: string
 }
 
 export type MessageLevels = 'primary' | 'warming' | 'danger'

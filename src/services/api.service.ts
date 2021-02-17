@@ -1,11 +1,18 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
-import { Category, Product } from '@/models/base.model'
+import {
+  BaseCategory,
+  BaseProduct,
+  Category,
+  CreationResponse,
+  Product,
+  Unformatted
+} from '@/models/base.model'
 
 // Класс для отправки/получения сетевых запросов
 export default class ApiService {
   axios: AxiosInstance
-  private _cartProducts = 'products/'
-  private _categoryProducts = 'categories/'
+  private _products = 'products.json'
+  private _categories = 'categories.json'
   constructor() {
     this.axios = this.initAxios()
   }
@@ -18,17 +25,28 @@ export default class ApiService {
   }
 
   // Запрос на получение списка товаров в корзине
-  async getProducts(): Promise<AxiosResponse<Product[]>> {
-    return await this.axios.get(this._cartProducts)
+  async getProducts(): Promise<AxiosResponse<Unformatted<BaseProduct>>> {
+    return await this.axios.get(this._products)
   }
 
   // Запрос на получение списка категорий товаров
-  async getCategoryProducts(): Promise<AxiosResponse<Category[]>> {
-    return await this.axios.get(this._categoryProducts)
+  async getCategoryProducts(): Promise<
+    AxiosResponse<Unformatted<BaseCategory>>
+  > {
+    return await this.axios.get(this._categories)
   }
 
   // Создание новой категории
-  async createCategory(category: Category): Promise<AxiosResponse<Category>> {
-    return await this.axios.post(this._categoryProducts, category)
+  async createCategory(
+    category: Category
+  ): Promise<AxiosResponse<CreationResponse>> {
+    return await this.axios.post(this._categories, category)
+  }
+
+  // Создание нового продукта
+  async createProduct(
+    product: Product
+  ): Promise<AxiosResponse<CreationResponse>> {
+    return await this.axios.post(this._products, product)
   }
 }
