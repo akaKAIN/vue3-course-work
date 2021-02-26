@@ -1,4 +1,5 @@
 <template>
+  <back-button></back-button>
   <app-page back center :title="product?.title" v-if="product">
     <img :src="product?.img" :alt="product?.title" />
     <p>
@@ -18,10 +19,11 @@ import { Product } from '@/models/base.model'
 import { useStore } from 'vuex'
 import { useCart } from '@/use/cart'
 import PurchaseControl from '@/components/ui/PurchaseControl.vue'
+import BackButton from '@/components/ui/BackButton.vue'
 
 export default defineComponent({
   name: 'Product',
-  components: { PurchaseControl, AppPage },
+  components: { BackButton, PurchaseControl, AppPage },
   props: {
     id: {
       type: String

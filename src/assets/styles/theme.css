@@ -584,6 +584,10 @@ h3 {
     text-align: right
 }
 
+.text-left {
+    text-align: left;
+}
+
 .products-filter {
     padding: 1rem;
     width: 250px;

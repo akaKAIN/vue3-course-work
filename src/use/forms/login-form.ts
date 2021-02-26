@@ -1,9 +1,10 @@
 import * as yup from 'yup'
 import { useField, useForm } from 'vee-validate'
 import { notification } from '@/utils/notifications'
+import { SubmitCallback } from '@/models/form.model'
 
 const MIN_PASSWORD_LENGTH = 5
-export function useLoginForm() {
+export function useLoginForm(fn: SubmitCallback) {
   const { handleSubmit, isSubmitting } = useForm()
   const {
     value: email,
@@ -34,7 +35,7 @@ export function useLoginForm() {
       )
   )
 
-  const onSubmit = handleSubmit(values => console.log(values))
+  const onSubmit = handleSubmit(fn)
 
   return {
     email,

@@ -11,7 +11,7 @@ export interface RootState {
 }
 
 export interface AuthState {
-  token: string
+  token: string | null
 }
 
 export interface ProductState {
