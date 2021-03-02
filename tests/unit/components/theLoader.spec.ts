@@ -1,10 +1,10 @@
 import { expect } from 'chai'
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import TheLoader from '@/components/TheLoader.vue'
 
 describe('CartProduct.vue', () => {
   it('rendering loader if props is true', () => {
-    const wrapper = shallowMount(TheLoader, {
+    const wrapper = mount(TheLoader, {
       props: {
         isLoading: true
       }
@@ -13,7 +13,7 @@ describe('CartProduct.vue', () => {
   })
 
   it('no loader if props is false', () => {
-    const wrapper = shallowMount(TheLoader, {
+    const wrapper = mount(TheLoader, {
       props: {
         isLoading: false
       }

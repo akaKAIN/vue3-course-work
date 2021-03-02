@@ -1,7 +1,7 @@
 <template>
   <app-page title="Корзина">
     <cart-product></cart-product>
-    <!--    <small class="text-danger" v-if="error">{{ error }}</small>-->
+    <small class="text-danger" v-if="error">{{ error }}</small>
     <auth></auth>
   </app-page>
 </template>
@@ -19,7 +19,8 @@ export default defineComponent({
   setup() {
     const error = ref<null | unknown>(null)
     const showMessage = async (err: string | unknown) => {
-      const message = new Message('Login Error:', err, 'danger')
+      const errJson = JSON.stringify(err)
+      const message = new Message('Login Error:', errJson, 'danger')
       await message.show()
     }
     onErrorCaptured(err => {

@@ -3,18 +3,18 @@ import { useStore } from 'vuex'
 
 const store = useStore()
 
-export default class Message {
+export default class MyMessage {
   title: string
   text: string
   level: MessageLevels
-  constructor(title: string, text: string | unknown, level: MessageLevels) {
+  constructor(title: string, text: string, level: MessageLevels) {
     this.title = title
-    this.text = text ?? 'unkn'
+    this.text = text === 'null' ? text : ''
     this.level = level
   }
 
   async show() {
-    await store.dispatch('setMessage', this, { root: true })
+    await store.dispatch('setMessage', { ...this }, { root: true })
   }
 
   static getObject(
